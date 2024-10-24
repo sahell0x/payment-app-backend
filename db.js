@@ -26,3 +26,13 @@ mongoose.connection.on('reconnected', () => {
 });
 
 
+const userSchema = mongoose.Schema({
+    userName:String,
+    passWord:String,
+    firstName:String,
+    lastName:String
+});
+
+const User = mongoose.Model("User",userSchema);
+
+module.exports= {User};
