@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
+const dbUrl = process.env.DB_URL;
+
 (async function () {
   try {
-    await mongoose.connect(
-      "mongodb+srv://leeugaming34:9826405638@cluster0.ftlll.mongodb.net/payment"
-    );
+    await mongoose.connect(dbUrl);
   } catch {
     console.log("failed to connect with db");
   }
@@ -34,5 +34,6 @@ const userSchema = mongoose.Schema({
 });
 
 const User = mongoose.model("User", userSchema);
+
 
 module.exports = { User };
