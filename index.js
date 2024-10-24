@@ -13,7 +13,7 @@ app.use("/api/v1/user",userRout);
 app.use("/api/v1/acount",acountRout);
 
 app.use((err,req,res,next)=>{
-   res.status(500).send("internal server error");
+   res.status(500).send("internal server error!!");
 });
 
 app.listen(3000,()=>{

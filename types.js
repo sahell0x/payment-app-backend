@@ -1,6 +1,6 @@
 const z = require("zod");
 
-const userTypes = mongoose.Schema({
+const userTypes = z.object({
     userName: z.string().max(30),
     passWord: z.string().min(6),
     firstName: z.string().min(3).max(30),
