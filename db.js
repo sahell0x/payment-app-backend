@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 (async function(){
    try{
-    await mongoose.connect("mmongodb+srv://leeugaming34:9826405638@cluster0.ftlll.mongodb.net/payment-app");
+    await mongoose.connect("mongodb+srv://leeugaming34:9826405638@cluster0.ftlll.mongodb.net/payment");
    }
    catch{
         console.log("failed to connect with db")
@@ -33,6 +33,6 @@ const userSchema = mongoose.Schema({
     lastName:String
 });
 
-const User = mongoose.Model("User",userSchema);
+const User = mongoose.model("User",userSchema);
 
 module.exports= {User};
