@@ -35,14 +35,16 @@ router.post("/signup", signUpMiddleware, async (req, res) => {
 });
 
 router.post("/signin",signinMiddleWare,async (req,res)=>{
+  const body = req.body;
    try{
-    const body = req.body;
+    
     const response = await User.findOne({email:body.email});
  
     if(response){
-      if(body.password === response.password){
-        return  res.status(200).json({
-           massage:"login successfully",
+      const isMatched = await bcrypt.compare(body.password,response.password);
+      if(isMatched){
+        return res.status(200).json({
+          massage:"login successfully"
         })
       }
     }
