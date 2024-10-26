@@ -28,7 +28,7 @@ mongoose.connection.on("reconnected", () => {
 
 const userSchema = mongoose.Schema({
   email: { type: String, required: true, trim: true, unique: true },
-  password: { type: String, minLength: 3, maxLength: 30, required: true },
+  password: { type: String,required: true },
   firstName: { type: String, trim: true, required: true, maxLength: 50 },
   lastName: { type: String, trim: true, required: true, maxLength: 50 },
 });

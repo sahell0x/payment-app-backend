@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
 const secret = process.env.JWT_SECRET;
 const User = require("../db");
 const express = require("express");
@@ -8,8 +9,9 @@ const signinMiddleWare = require("../middlewares/signinMiddleWare");
 const router = express.Router();
 
 router.post("/signup", signUpMiddleware, async (req, res) => {
+   const body = req.body;
   try {
-    const body = req.body;
+    
     const user = await User.findOne({ email: body.email });
 
     if (user) {
@@ -17,8 +19,9 @@ router.post("/signup", signUpMiddleware, async (req, res) => {
         massage: "email  already taken",
       });
     }
-
-    const response = await User.create(req.body);
+    const hashedPassword = await bcrypt.hash(body.password,10);
+      body.password = hashedPassword;
+    const response = await User.create(body);
 
     const userToken = jwt.sign({ id: response._id }, secret);
     res.status(200).json({
