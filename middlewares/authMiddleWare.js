@@ -10,12 +10,15 @@ const authMiddleWare = (req,res,next)=>{
         
         const token = authHeader.split(" ")[1];
         const decode = jwt.verify(token,secret);
+        if(decode.id){
+            next();
+        }else{
+            res.status(403).json({});
+        }
 
     }catch(e){
         console.log(e);
-        return res.status.json({
-            massage:"server error"
-        })
+        return res.status(403).json({ })
 
     }
 }
