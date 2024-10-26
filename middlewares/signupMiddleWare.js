@@ -1,13 +1,12 @@
-const userTypes = require("../types");
+const {signUpTypes} = require("../types");
 
 
 const signUpMiddleware = (req,res,next)=>{
     const userPayload = req.body;
-    const parsedBody = userTypes.safeParse(userPayload);
+    const {success} = signUpTypes.safeParse(userPayload);
 
-    if (!parsedBody.success) {
-        res.status(400).send("invalid input!!");
-        return;
+    if (!success) {
+        return res.status(400).send("invalid input!!");
     }
     next();
 }
