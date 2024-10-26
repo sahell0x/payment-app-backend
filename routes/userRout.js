@@ -3,6 +3,7 @@ const secret = process.env.JWT_SECRET;
 const User = require("../db");
 const express = require("express");
 const signUpMiddleware = require("../middlewares/signupMiddleWare");
+const signinMiddleWare = require("../middlewares/signinMiddleWare");
 
 const router = express.Router();
 
@@ -13,7 +14,7 @@ router.post("/signup", signUpMiddleware, async (req, res) => {
 
     if (user) {
       return res.json({
-        massage: "username  already exist",
+        massage: "email  already taken",
       });
     }
 
@@ -30,6 +31,28 @@ router.post("/signup", signUpMiddleware, async (req, res) => {
   }
 });
 
-router.post("/signin",)
+router.post("/signin",signinMiddleWare,async (req,res)=>{
+   try{
+    const body = req.body;
+    const response = await User.findOne({email:body.email});
+ 
+    if(response){
+      if(body.password === response.password){
+        return  res.status(200).json({
+           massage:"login successfully",
+        })
+      }
+    }
+ 
+    return res.status(400).json({
+     massage:"invalid email or password",
+    })
+   }catch(e){
+      console.log(e);
+      res.status(500).json({
+        massage:"internal server error"
+      })
+   }
+})
 
 module.exports = router;
