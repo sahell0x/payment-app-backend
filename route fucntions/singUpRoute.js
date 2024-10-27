@@ -1,3 +1,9 @@
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcrypt");
+const secret = process.env.JWT_SECRET;
+const User = require("../db");
+
+
 module.exports = async (req, res) => {
     const body = req.body;
    try {
