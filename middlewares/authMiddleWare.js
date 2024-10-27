@@ -11,6 +11,7 @@ const authMiddleWare = (req,res,next)=>{
         const token = authHeader.split(" ")[1];
         const decode = jwt.verify(token,secret);
         if(decode.id){
+            req.userId = decode.id;
             next();
         }else{
             res.status(403).json({});
