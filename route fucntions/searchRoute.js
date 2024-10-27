@@ -14,7 +14,14 @@ module.exports = async (req,res)=>{
             ]
         });
 
-        res.status(200).json({users:users});
+        res.status(200).json({users:users.map((user)=>{
+            return {
+                email:user.email,
+                firstName:user.firstName,
+                lastName:user.lastName,
+                _id:user._id
+            }
+        })});
 
     }catch(e){
         console.log(e);
