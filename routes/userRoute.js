@@ -1,7 +1,3 @@
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
-const secret = process.env.JWT_SECRET;
-const User = require("../db");
 const express = require("express");
 const signUpMiddleware = require("../middlewares/signupMiddleWare");
 const signinMiddleWare = require("../middlewares/signinMiddleWare");

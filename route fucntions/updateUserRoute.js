@@ -1,11 +1,16 @@
 const User = require("../db");
 const {updateUserTypes} = require("../types");
+const bcrypt = require("bcrypt");
 
 module.exports = async (req,res)=>{
     try{
         const body = req.body;
         const {success} = updateUserTypes.safeParse(body);
         if(success){
+            if(body.password){
+                const hashedPassword = await bcrypt.hash(body.password,10);
+                body.password = hashedPassword;
+            }
             const id = req.userId;
             await User.findOneAndUpdate({_id:id},body);
 
