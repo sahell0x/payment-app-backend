@@ -7,6 +7,6 @@ const router = express.Router();
 
 router.get("/balance",authMiddleWare,balanceRoute);
 
-router.post("/transfer",authMiddleWare,transferMiddleWare,);
+router.post("/transfer",authMiddleWare,transferMiddleWare,transferRoute);
 
 module.exports = router;

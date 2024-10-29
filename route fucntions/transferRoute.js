@@ -7,7 +7,7 @@ module.exports = async (req,res)=>{
         const session = await mongoose.startSession();
 
         session.startTransaction();
-        const { amount, to } = req.body;
+        let { amount, to } = req.body;
 
         amount *= 100; // convert into intizer and suppport our decimal policy that we are storing numbers as intizer in db to get rid of floating-point precision error;
 
@@ -32,7 +32,7 @@ module.exports = async (req,res)=>{
         await Acount.updateOne({userId:userId},{$inc:{balance: -amount}}).session(session);
 
         await Acount.updateOne({userId:to},{$inc:{balance: amount}}).session(session);
-        
+
         //commit transaction
         await session.commitTransaction();
 
