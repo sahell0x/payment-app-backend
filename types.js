@@ -18,4 +18,9 @@ const signUpTypes = z.object({
     lastName: z.string().min(3).max(30).optional()
   })
 
-  module.exports= {signUpTypes,signInTypes,updateUserTypes};
+  const transferTypes = z.object({
+    amount:z.number().min(1),
+    to:z.string()
+  });
+
+  module.exports= {signUpTypes,signInTypes,updateUserTypes,transferTypes};

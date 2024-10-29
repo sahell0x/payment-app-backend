@@ -2,11 +2,11 @@ const {Acount} = require("../db");
 module.exports = async(req,res)=>{
     try{
         const userId = req.userId;
-        const response = await Acount.findOne({userId:userId});
+        const acount = await Acount.findOne({userId:userId});
 
-        if(response){
+        if(acount){
             return res.status(200).json({
-                balance:response.balance
+                balance:acount.balance
             })
         }
 
