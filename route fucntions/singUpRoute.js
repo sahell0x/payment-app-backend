@@ -22,7 +22,7 @@ module.exports = async (req, res) => {
 
      await Acount.create({      // give user some initial balance
         userId:userId,
-        balance:  1 + Math.random() * 10000
+        balance:  Math.floor(1 + Math.random() * 10000) * 100 // make precisness;
      })
  
      const userToken = jwt.sign({ id: userId }, secret);

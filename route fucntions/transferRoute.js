@@ -4,10 +4,16 @@ const {Acount} = require("../db");
 module.exports = async (req,res)=>{
     try{
         const userId = req.userId;
+        let { amount, to } = req.body;
+        
+        if(userId === to){
+            return res.status(400).json({
+                massage:"are you kidding me!!!",
+            });
+        }
         const session = await mongoose.startSession();
 
         session.startTransaction();
-        let { amount, to } = req.body;
 
         amount *= 100; // convert into intizer and suppport our decimal policy that we are storing numbers as intizer in db to get rid of floating-point precision error;
 
