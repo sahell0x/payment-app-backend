@@ -1,8 +1,8 @@
 const express = require("express");
-
+const authMiddleWare = require("../middlewares/authMiddleWare");
 const router = express.Router();
 
-router.get("/balance")
+router.get("/balance",authMiddleWare)
 
 
 
