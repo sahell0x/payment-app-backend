@@ -1,8 +1,13 @@
 const express = require("express");
 const authMiddleWare = require("../middlewares/authMiddleWare");
+const transferMiddleWare = require("../middlewares/transferMiddleWare");
 const balanceRoute = require("../route fucntions/balanceRoute");
 const router = express.Router();
 
 router.get("/balance",authMiddleWare,balanceRoute);
+
+router.post("/transfer",authMiddleWare,transferMiddleWare,(req,res)=>{
+        return res.send("hi there");
+})
 
 module.exports = router;

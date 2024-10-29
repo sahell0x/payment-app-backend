@@ -12,7 +12,7 @@ app.use("/api/v1/user",userRoute);
 app.use("/api/v1/acount",acountRoute);
 
 app.use((err,req,res,next)=>{
-   res.status(500).send("internal server error!!");
+  return res.status(500).send("internal server error!!");
 });
 
 app.listen(3000,()=>{

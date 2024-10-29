@@ -1,11 +1,11 @@
-const transferTypes = require("../types");
+const {transferTypes} = require("../types");
 
-module.exports = (req,res,next)=>{
+module.exports = async (req,res,next)=>{
     try{
         const body = req.body;
          const {success} = transferTypes.safeParse(body);
          if(success){
-            next();
+           return next();
          }
          return res.status(400).json({
             massage:"invalid inputs",
