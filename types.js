@@ -19,7 +19,7 @@ const updateUserTypes = z.object({
 });
 
 const transferTypes = z.object({
-  amount: z.number().refine(
+  amount: z.number().min(1).refine(
     (n) => {
       const decimalPart = n.toString().split(".")[1];
       return !decimalPart || decimalPart.length <= 2;
